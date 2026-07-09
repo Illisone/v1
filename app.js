@@ -44,66 +44,198 @@ let currentUser = {
     role: 'user'
 };
 
-// ========== ДАННЫЕ ТОВАРОВ (ИЗ ЛЕНДИНГА SibXtrim) ==========
-let snowmobiles = [
-    { 
-        id: 1, 
-        name: 'BRP Skandic LE 24"', 
-        price: '2 090 000 ₽', 
-        status: 'in_stock', 
-        spec: '900 ACE • 95 л.с.', 
-        desc: 'Флагманский утилитарный снегоход на платформе REV Gen5. Максимальная проходимость для работы и охоты.',
-        image: 'https://ski-doo.brp.com/content/dam/global/en/ski-doo/my25/studio/sport-utility/skandic/side/SKI-MY25-SKA-SE-900-ACE-Dusty-Navy-000ANSH00-Studio-RSIDE-NA.png'
+// ========== ДАННЫЕ ТОВАРОВ ==========
+let catalogData = {
+    snowmobiles: [
+        { 
+            id: 1, 
+            name: 'BRP Skandic LE 24"', 
+            price: '2 090 000 ₽', 
+            status: 'in_stock', 
+            condition: 'new',
+            spec: '900 ACE • 95 л.с.', 
+            desc: 'Флагманский утилитарный снегоход на платформе REV Gen5. Максимальная проходимость для работы и охоты.',
+            chars: { 'Двигатель': 'Rotax 900 ACE', 'Мощность': '95 л.с.', 'Гусеница': '24"', 'Платформа': 'REV Gen5' },
+            images: [
+                'https://ski-doo.brp.com/content/dam/global/en/ski-doo/my25/studio/sport-utility/skandic/side/SKI-MY25-SKA-SE-900-ACE-Dusty-Navy-000ANSH00-Studio-RSIDE-NA.png',
+                'https://picsum.photos/seed/skandic1/600/400',
+                'https://picsum.photos/seed/skandic2/600/400'
+            ]
+        },
+        { 
+            id: 2, 
+            name: 'BRP Skandic SE 24"', 
+            price: '2 250 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '900 ACE • 95 л.с.', 
+            desc: 'Утилитарный снегоход с акцентом на комфорт и технологии.',
+            chars: { 'Двигатель': 'Rotax 900 ACE', 'Мощность': '95 л.с.', 'Гусеница': '24"', 'Платформа': 'REV Gen5' },
+            images: [
+                'https://ski-doo.brp.com/content/dam/global/en/ski-doo/my25/studio/sport-utility/skandic/3-4-front/SKI-MY25-SKA-SE-600R-ETEC-Dusty-Navy-000AUSD00-Studio-34FR-NA.png',
+                'https://picsum.photos/seed/skandicse1/600/400',
+                'https://picsum.photos/seed/skandicse2/600/400'
+            ]
+        },
+        { 
+            id: 3, 
+            name: 'BRP Expedition LE 24"', 
+            price: '2 260 000 ₽', 
+            status: 'in_stock', 
+            condition: 'new',
+            spec: '900 ACE • REV Gen5', 
+            desc: 'Универсальный спортивно-утилитарный снегоход. Подвеска uMotion.',
+            chars: { 'Двигатель': 'Rotax 900 ACE', 'Подвеска': 'uMotion', 'Гусеница': '24"', 'Платформа': 'REV Gen5' },
+            images: [
+                'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png',
+                'https://picsum.photos/seed/expedition1/600/400',
+                'https://picsum.photos/seed/expedition2/600/400'
+            ]
+        },
+        { 
+            id: 4, 
+            name: 'BRP Expedition SE 24"', 
+            price: '2 350 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '900 ACE • REV Gen5', 
+            desc: 'Премиальный утилитарный снегоход. Подогрев ручек, цифровая панель 7.8".',
+            chars: { 'Двигатель': 'Rotax 900 ACE', 'Подогрев': 'Ручек и сиденья', 'Панель': '7.8" Digital', 'Подвеска': 'uMotion' },
+            images: [
+                'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png',
+                'https://picsum.photos/seed/expeditionse1/600/400',
+                'https://picsum.photos/seed/expeditionse2/600/400'
+            ]
+        },
+        { 
+            id: 5, 
+            name: 'BRP Expedition SE Turbo R', 
+            price: '2 690 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '900 ACE Turbo R • 180 л.с.', 
+            desc: 'Абсолютный флагман. 180 лошадей турбированного Rotax.',
+            chars: { 'Двигатель': 'Rotax 900 ACE Turbo R', 'Мощность': '180 л.с.', 'Подвеска': 'uMotion', 'Платформа': 'REV Gen5' },
+            images: [
+                'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png',
+                'https://picsum.photos/seed/turbor1/600/400',
+                'https://picsum.photos/seed/turbor2/600/400'
+            ]
+        },
+        { 
+            id: 6, 
+            name: 'BRP Skandic LE 24" (с пробегом)', 
+            price: '1 690 000 ₽', 
+            status: 'in_stock', 
+            condition: 'used',
+            spec: '900 ACE • 95 л.с.', 
+            desc: 'Б/у снегоход в отличном состоянии. Пробег 5000 км.',
+            chars: { 'Двигатель': 'Rotax 900 ACE', 'Мощность': '95 л.с.', 'Пробег': '5000 км', 'Состояние': 'Отличное' },
+            images: [
+                'https://ski-doo.brp.com/content/dam/global/en/ski-doo/my25/studio/sport-utility/skandic/side/SKI-MY25-SKA-SE-900-ACE-Dusty-Navy-000ANSH00-Studio-RSIDE-NA.png',
+                'https://picsum.photos/seed/usedskandic1/600/400'
+            ]
+        }
+    ],
+    atvs: [
+        { 
+            id: 101, 
+            name: 'BRP Outlander MAX XT 650', 
+            price: '1 450 000 ₽', 
+            status: 'in_stock', 
+            condition: 'new',
+            spec: '650cc • 62 л.с.', 
+            desc: 'Мощный квадроцикл для бездорожья. Двухместная версия.',
+            chars: { 'Двигатель': '650cc', 'Мощность': '62 л.с.', 'Привод': 'Полный', 'Коробка': 'CVT' },
+            images: [
+                'https://picsum.photos/seed/outlander1/600/400',
+                'https://picsum.photos/seed/outlander2/600/400',
+                'https://picsum.photos/seed/outlander3/600/400'
+            ]
+        },
+        { 
+            id: 102, 
+            name: 'BRP Outlander XT 850', 
+            price: '1 680 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '850cc • 78 л.с.', 
+            desc: 'Спортивный квадроцикл с мощным двигателем.',
+            chars: { 'Двигатель': '850cc', 'Мощность': '78 л.с.', 'Привод': 'Полный', 'Коробка': 'CVT' },
+            images: [
+                'https://picsum.photos/seed/outlander8501/600/400',
+                'https://picsum.photos/seed/outlander8502/600/400'
+            ]
+        }
+    ],
+    watercraft: [
+        { 
+            id: 201, 
+            name: 'Sea-Doo GTI 170', 
+            price: '1 250 000 ₽', 
+            status: 'in_stock', 
+            condition: 'new',
+            spec: '170 л.с. • 3-цилиндровый', 
+            desc: 'Отличный гидроцикл для активного отдыха на воде.',
+            chars: { 'Двигатель': 'Rotax 3-cylinder', 'Мощность': '170 л.с.', 'Тип': 'Гидроцикл', 'Вместимость': '3 человека' },
+            images: [
+                'https://picsum.photos/seed/seadoo1/600/400',
+                'https://picsum.photos/seed/seadoo2/600/400',
+                'https://picsum.photos/seed/seadoo3/600/400'
+            ]
+        },
+        { 
+            id: 202, 
+            name: 'Sea-Doo RXP-X 300', 
+            price: '1 890 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '300 л.с. • Турбо', 
+            desc: 'Спортивный гидроцикл с турбированным двигателем.',
+            chars: { 'Двигатель': 'Rotax Turbo', 'Мощность': '300 л.с.', 'Тип': 'Спортивный', 'Макс. скорость': '110 км/ч' },
+            images: [
+                'https://picsum.photos/seed/rxpx1/600/400',
+                'https://picsum.photos/seed/rxpx2/600/400'
+            ]
+        }
+    ],
+    accessories: {
+        snow: [
+            { id: 301, name: 'Защита картера для снегохода', price: '8 500 ₽', status: 'in_stock', spec: 'Алюминий', desc: 'Надёжная защита днища для Ski-Doo.', image: 'https://picsum.photos/seed/snowguard/400/400' },
+            { id: 302, name: 'Сумка для снегохода', price: '6 900 ₽', status: 'in_stock', spec: 'Водонепроницаемая', desc: 'Для перевозки вещей на снегоходе.', image: 'https://picsum.photos/seed/snowbag/400/400' }
+        ],
+        atv: [
+            { id: 303, name: 'Защита картера для квадроцикла', price: '7 200 ₽', status: 'in_stock', spec: 'Сталь', desc: 'Защита двигателя от камней и грязи.', image: 'https://picsum.photos/seed/atvguard/400/400' },
+            { id: 304, name: 'Багажник для квадроцикла', price: '5 800 ₽', status: 'on_order', spec: 'Алюминий', desc: 'Увеличение грузоподъемности.', image: 'https://picsum.photos/seed/atvrack/400/400' }
+        ],
+        water: [
+            { id: 305, name: 'Чехол для гидроцикла', price: '4 500 ₽', status: 'in_stock', spec: 'Водонепроницаемый', desc: 'Защита гидроцикла от солнца и влаги.', image: 'https://picsum.photos/seed/watercover/400/400' },
+            { id: 306, name: 'Спасательный жилет', price: '3 200 ₽', status: 'in_stock', spec: 'Universal', desc: 'Спасательный жилет для безопасного отдыха.', image: 'https://picsum.photos/seed/vest/400/400' }
+        ]
     },
-    { 
-        id: 2, 
-        name: 'BRP Skandic SE 24"', 
-        price: '2 250 000 ₽', 
-        status: 'on_order', 
-        spec: '900 ACE • 95 л.с.', 
-        desc: 'Утилитарный снегоход с акцентом на комфорт и технологии. Платформа REV Gen5.',
-        image: 'https://ski-doo.brp.com/content/dam/global/en/ski-doo/my25/studio/sport-utility/skandic/3-4-front/SKI-MY25-SKA-SE-600R-ETEC-Dusty-Navy-000AUSD00-Studio-34FR-NA.png'
-    },
-    { 
-        id: 3, 
-        name: 'BRP Expedition LE 24"', 
-        price: '2 260 000 ₽', 
-        status: 'in_stock', 
-        spec: '900 ACE • REV Gen5', 
-        desc: 'Универсальный спортивно-утилитарный снегоход. Подвеска uMotion, платформа REV Gen5.',
-        image: 'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png'
-    },
-    { 
-        id: 4, 
-        name: 'BRP Expedition SE 24"', 
-        price: '2 350 000 ₽', 
-        status: 'on_order', 
-        spec: '900 ACE • REV Gen5', 
-        desc: 'Премиальный утилитарный снегоход. Подогрев ручек, цифровая панель 7.8", аудиосистема.',
-        image: 'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png'
-    },
-    { 
-        id: 5, 
-        name: 'BRP Expedition SE Turbo R', 
-        price: '2 690 000 ₽', 
-        status: 'on_order', 
-        spec: '900 ACE Turbo R • 180 л.с.', 
-        desc: 'Абсолютный флагман. 180 лошадей турбированного Rotax, REV Gen5, подвеска uMotion.',
-        image: 'https://www.brp-world.com/content/dam/global/en/ski-doo/my26/studio/crossover/expedition/3-4-front/SKI-MY26-EXP-SE-900-ACE-Turbo-R-Tundra-Green-000AYTJ00-Studio-34FR-NA.png'
-    }
-];
+    utv: [
+        { 
+            id: 401, 
+            name: 'BRP Can-Am Commander MAX 1000', 
+            price: '2 450 000 ₽', 
+            status: 'on_order', 
+            condition: 'new',
+            spec: '1000cc • 100 л.с.', 
+            desc: 'Мощный вездеход на 4 пассажира.',
+            chars: { 'Двигатель': '1000cc', 'Мощность': '100 л.с.', 'Вместимость': '4 человека', 'Привод': 'Полный' },
+            images: [
+                'https://picsum.photos/seed/commander1/600/400',
+                'https://picsum.photos/seed/commander2/600/400',
+                'https://picsum.photos/seed/commander3/600/400'
+            ]
+        }
+    ]
+};
 
-// ========== АКСЕССУАРЫ ==========
-let accessories = [
-    { id: 201, name: 'Моторное масло 5W-40', price: '3 500 ₽', status: 'in_stock', spec: '4 л, синтетика', desc: 'Для всех типов двигателей BRP.', image: 'https://picsum.photos/seed/oil/400/400' },
-    { id: 202, name: 'Ремень вариатора', price: '12 000 ₽', status: 'in_stock', spec: 'Оригинал BRP', desc: 'Запасной ремень для Ski-Doo.', image: 'https://picsum.photos/seed/belt/400/400' },
-    { id: 203, name: 'Защита картера', price: '8 500 ₽', status: 'in_stock', spec: 'Алюминий', desc: 'Надёжная защита днища.', image: 'https://picsum.photos/seed/guard/400/400' },
-    { id: 204, name: 'Сумка для снегохода', price: '6 900 ₽', status: 'in_stock', spec: 'Водонепроницаемая', desc: 'Для перевозки вещей.', image: 'https://picsum.photos/seed/bag/400/400' }
-];
+let nextProductId = 500;
+let favorites = [];
 
-let nextProductId = 300;
-
-// ========== ПОСТЫ (НОВОСТИ) ==========
+// ========== ПОСТЫ ==========
 let posts = [
     {
         id: 1,
@@ -201,8 +333,14 @@ let chatNotificationsEnabled = true;
 let replyTargetMsg = null;
 let activeTab = 'news';
 let currentFilter = 'all';
+let currentCondition = 'all';
 let currentPrivateUserId = null;
 let commentReplyTarget = null;
+let currentCatalogSection = null;
+let currentCatalogSubsection = null;
+let sliderIndex = 0;
+let currentModalItem = null;
+let searchResults = [];
 
 // ========== УТИЛИТЫ ==========
 function showToast(msg) {
@@ -254,31 +392,6 @@ function updateNotifBadge() {
     }
 }
 
-function showNotifications() {
-    const panel = document.getElementById('notifPanel');
-    panel.style.display = 'flex';
-    setTimeout(() => panel.classList.add('show'), 10);
-    notifications.forEach(n => n.read = true);
-    updateNotifBadge();
-    renderNotifications();
-}
-
-function renderNotifications() {
-    const list = document.getElementById('notifList');
-    if (!list) return;
-    if (!notifications.length) {
-        list.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,0.3);font-size:13px;">Нет уведомлений</div>';
-        return;
-    }
-    list.innerHTML = notifications.map(n => `
-        <div class="notif-item">
-            <div class="notif-title">${n.title}</div>
-            <div class="notif-text">${n.text}</div>
-            <div class="notif-time">${n.time}</div>
-        </div>
-    `).join('');
-}
-
 // ========== ВИДЕО ФОН ==========
 document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('hero-video');
@@ -296,80 +409,236 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ========== РЕНДЕР РАЗДЕЛОВ ТОВАРОВ ==========
-function renderSection(items, title, icon, type) {
-    let filtered = items;
-    if (currentFilter === 'in_stock') filtered = items.filter(i => i.status === 'in_stock');
-    else if (currentFilter === 'on_order') filtered = items.filter(i => i.status === 'on_order');
+// ========== ПОЛУЧЕНИЕ ТОВАРОВ ==========
+function getAllItems() {
+    const items = [];
+    for (const key in catalogData) {
+        if (key === 'accessories') {
+            for (const sub in catalogData.accessories) {
+                catalogData.accessories[sub].forEach(a => {
+                    a._category = sub;
+                    a._type = 'accessory';
+                    items.push(a);
+                });
+            }
+        } else {
+            catalogData[key].forEach(item => {
+                item._type = key;
+                items.push(item);
+            });
+        }
+    }
+    return items;
+}
 
+function getItemsByType(type) {
+    const items = [];
+    if (type === 'accessories') {
+        for (const sub in catalogData.accessories) {
+            catalogData.accessories[sub].forEach(a => {
+                a._category = sub;
+                a._type = 'accessory';
+                items.push(a);
+            });
+        }
+    } else if (catalogData[type]) {
+        catalogData[type].forEach(item => {
+            item._type = type;
+            items.push(item);
+        });
+    }
+    return items;
+}
+
+function getAccessoriesBySub(sub) {
+    return (catalogData.accessories[sub] || []).map(a => {
+        a._category = sub;
+        a._type = 'accessory';
+        return a;
+    });
+}
+
+function getSectionLabel(section) {
+    const labels = {
+        'snowmobiles': 'Снегоходы',
+        'atvs': 'Квадроциклы',
+        'watercraft': 'Гидроциклы',
+        'accessories': 'Аксессуары',
+        'utv': 'Вездеходы'
+    };
+    return labels[section] || section;
+}
+
+function getSectionIcon(section) {
+    const icons = {
+        'snowmobiles': 'fa-snowmobile',
+        'atvs': 'fa-motorcycle',
+        'watercraft': 'fa-water',
+        'accessories': 'fa-tools',
+        'utv': 'fa-car'
+    };
+    return icons[section] || 'fa-box';
+}
+
+// ========== РЕНДЕР КАТАЛОГА ==========
+function renderCatalogMenu() {
+    const sections = [
+        { id: 'snowmobiles', icon: '❄', label: 'Снегоходы' },
+        { id: 'atvs', icon: '🏍', label: 'Квадроциклы' },
+        { id: 'watercraft', icon: '🌊', label: 'Гидроциклы' },
+        { id: 'accessories', icon: '🛠', label: 'Аксессуары' },
+        { id: 'utv', icon: '🚙', label: 'Вездеходы' }
+    ];
+    
     let html = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-            <h2 style="font-size:20px;font-weight:700;color:white;display:flex;align-items:center;gap:8px;">
-                <i class="${icon}" style="color:#0063c7;"></i> ${title}
-            </h2>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <span style="font-size:12px;color:rgba(255,255,255,0.4);">${filtered.length} шт.</span>
-                ${isAdmin() ? `<button class="admin-panel-btn glass-button" onclick="showAddProduct('${type}')"><i class="fas fa-plus"></i> Добавить</button>` : ''}
+        <div style="margin-bottom:12px;">
+            <h2 style="font-size:18px;color:white;margin-bottom:12px;"><i class="fas fa-th-large" style="color:#0063c7;"></i> Выберите раздел</h2>
+            <div class="catalog-menu">
+    `;
+    
+    for (const section of sections) {
+        let count = 0;
+        if (section.id === 'accessories') {
+            for (const sub in catalogData.accessories) {
+                count += catalogData.accessories[sub].length;
+            }
+        } else if (catalogData[section.id]) {
+            count = catalogData[section.id].length;
+        }
+        
+        html += `
+            <div class="catalog-menu-item" data-section="${section.id}">
+                <span class="icon">${section.icon}</span>
+                <div class="label">${section.label}</div>
+                <div class="count">${count} шт.</div>
             </div>
+        `;
+    }
+    
+    html += `</div></div>`;
+    return html;
+}
+
+function renderCatalogSection(section) {
+    let items = [];
+    let title = getSectionLabel(section);
+    let icon = getSectionIcon(section);
+    
+    if (section === 'accessories') {
+        if (currentCatalogSubsection) {
+            items = getAccessoriesBySub(currentCatalogSubsection);
+            const subLabels = { 'snow': 'Снежные', 'atv': 'Квадро', 'water': 'Гидро' };
+            title = 'Аксессуары — ' + (subLabels[currentCatalogSubsection] || '');
+        } else {
+            items = getItemsByType('accessories');
+        }
+    } else if (catalogData[section]) {
+        items = catalogData[section];
+    }
+    
+    // Фильтр по статусу
+    if (currentFilter === 'in_stock') items = items.filter(i => i.status === 'in_stock');
+    else if (currentFilter === 'on_order') items = items.filter(i => i.status === 'on_order');
+    
+    // Фильтр по состоянию (только для техники)
+    if (currentCondition !== 'all' && section !== 'accessories') {
+        items = items.filter(i => i.condition === currentCondition);
+    }
+    
+    let html = `
+        <div class="catalog-section-header">
+            <button class="back-btn" id="catalogBackBtn"><i class="fas fa-arrow-left"></i></button>
+            <div class="title"><i class="fas ${icon}"></i> ${title}</div>
+            ${isAdmin() ? `<button class="admin-panel-btn glass-button" onclick="showAddProduct('${section}')"><i class="fas fa-plus"></i></button>` : ''}
         </div>
-        <div class="filter-bar">
+    `;
+    
+    // Подразделы для аксессуаров
+    if (section === 'accessories') {
+        html += `
+            <div class="filter-bar" style="margin-bottom:10px;">
+                <button class="filter-btn ${!currentCatalogSubsection ? 'active' : ''}" data-sub="all">Все</button>
+                <button class="filter-btn ${currentCatalogSubsection === 'snow' ? 'active' : ''}" data-sub="snow">❄ Снежные</button>
+                <button class="filter-btn ${currentCatalogSubsection === 'atv' ? 'active' : ''}" data-sub="atv">🏍 Квадро</button>
+                <button class="filter-btn ${currentCatalogSubsection === 'water' ? 'active' : ''}" data-sub="water">🌊 Гидро</button>
+            </div>
+        `;
+    }
+    
+    // Фильтр по наличию
+    html += `
+        <div class="filter-bar" style="margin-bottom:6px;">
             <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">Все</button>
             <button class="filter-btn ${currentFilter === 'in_stock' ? 'active' : ''}" data-filter="in_stock"><i class="fas fa-check-circle" style="color:#34c759;"></i> В наличии</button>
             <button class="filter-btn ${currentFilter === 'on_order' ? 'active' : ''}" data-filter="on_order"><i class="fas fa-clock" style="color:#ff9500;"></i> Под заказ</button>
         </div>
     `;
-
-    for (let item of filtered) {
+    
+    // Фильтр с бегунком (состояние) - только для техники
+    if (section !== 'accessories') {
+        html += `
+            <div class="filter-slider-row">
+                <span class="filter-label"><i class="fas fa-sliders-h"></i> Состояние</span>
+                <div class="filter-options">
+                    <button class="filter-opt ${currentCondition === 'all' ? 'active' : ''}" data-cond="all">Все</button>
+                    <button class="filter-opt ${currentCondition === 'new' ? 'active' : ''}" data-cond="new">🆕 Новый</button>
+                    <button class="filter-opt ${currentCondition === 'used' ? 'active' : ''}" data-cond="used">📋 С пробегом</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Количество
+    html += `
+        <div style="font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:10px;">Найдено: ${items.length} шт.</div>
+    `;
+    
+    if (!items.length) {
+        html += `
+            <div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.3);font-size:13px;">
+                <i class="fas fa-box-open" style="font-size:32px;display:block;margin-bottom:10px;color:rgba(255,255,255,0.1);"></i>
+                Товаров не найдено
+            </div>
+        `;
+        return html;
+    }
+    
+    for (let item of items) {
         const statusText = item.status === 'in_stock' ? 'В наличии' : 'Под заказ';
         const statusClass = item.status === 'in_stock' ? 'in-stock' : 'on-order';
+        const condText = item.condition === 'new' ? 'Новый' : item.condition === 'used' ? 'С пробегом' : '';
+        const imgSrc = item.images ? item.images[0] : (item.image || 'https://picsum.photos/seed/default/400/400');
+        const isFav = favorites.includes(item.id);
+        
         html += `
-            <div class="product-card" data-id="${item.id}" data-type="${type}">
+            <div class="product-card" data-id="${item.id}" data-section="${section}">
                 <div class="status-tag ${statusClass}">${statusText}</div>
                 <div class="product-content">
-                    <img class="product-img" src="${item.image}" alt="${item.name}">
+                    <img class="product-img" src="${imgSrc}" alt="${item.name}">
                     <div class="product-info">
                         <div class="product-name">${item.name}</div>
                         <div class="product-price">${item.price}</div>
-                        <div class="product-spec">${item.spec}</div>
-                        <div class="product-desc-short">${item.desc.substring(0, 50)}...</div>
-                        ${isAdmin() ? `<div style="margin-top:4px;font-size:10px;color:rgba(255,255,255,0.3);">ID: ${item.id}</div>` : ''}
+                        <div class="product-spec">${item.spec || ''} ${condText ? '• ' + condText : ''}</div>
+                        <div class="product-desc-short">${item.desc ? item.desc.substring(0, 50) + '...' : ''}</div>
+                        ${isFav ? '<span style="font-size:10px;color:#ff3b30;"><i class="fas fa-heart"></i> В избранном</span>' : ''}
                     </div>
                 </div>
             </div>
         `;
     }
-
-    // Аксессуары
-    html += `
-        <h3 style="font-size:16px;font-weight:600;color:white;margin:16px 0 10px;display:flex;align-items:center;gap:8px;">
-            <i class="fas fa-tools" style="color:#0063c7;"></i> Аксессуары
-            ${isAdmin() ? `<button class="admin-panel-btn glass-button" onclick="showAddProduct('accessory')"><i class="fas fa-plus"></i></button>` : ''}
-        </h3>
-        <div class="accessories-grid">
-    `;
-    for (let acc of accessories) {
-        html += `
-            <div class="accessory-mini" data-id="${acc.id}" data-type="accessory">
-                <img src="${acc.image}" alt="${acc.name}">
-                <div class="name">${acc.name}</div>
-                <div class="price">${acc.price}</div>
-            </div>
-        `;
-    }
-    html += `</div>`;
-
+    
     return html;
 }
 
-// ========== РЕНДЕР НОВОСТЕЙ (ЛЕНТА) ==========
+// ========== РЕНДЕР НОВОСТЕЙ ==========
 function renderFeed() {
     let html = `
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-            <h2 style="font-size:20px;color:white;"><i class="fas fa-newspaper" style="color:#0063c7;"></i> Новости</h2>
+            <h2 style="font-size:20px;color:white;"><i class="fas fa-newspaper" style="color:#0063c7;"></i> Поступления</h2>
             ${isAdmin() ? `<button class="admin-panel-btn glass-button" onclick="showAddPost()"><i class="fas fa-plus"></i> Создать пост</button>` : ''}
         </div>
     `;
-
+    
     for (let post of posts) {
         const likeIcon = post.liked ? 'fas' : 'far';
         html += `
@@ -393,7 +662,7 @@ function renderFeed() {
                 </div>
                 <div class="comments-section" id="comments-${post.id}">
         `;
-
+        
         for (let c of post.comments) {
             html += `
                 <div class="comment-item" data-comment-id="${c.id}">
@@ -419,7 +688,7 @@ function renderFeed() {
             }
             html += `</div>`;
         }
-
+        
         html += `
                     <div class="comment-form">
                         <div class="comment-reply-bar" id="comment-reply-bar-${post.id}" style="display:none;">
@@ -451,7 +720,7 @@ function renderReviews() {
             <span style="font-size:12px;color:rgba(255,255,255,0.4);"><i class="fas fa-check-circle" style="color:#0063c7;"></i> Из 2GIS: ${reviews.filter(r => r.source === '2GIS').length}</span>
         </div>
     `;
-
+    
     for (let r of reviews) {
         const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
         html += `
@@ -468,11 +737,11 @@ function renderReviews() {
             </div>
         `;
     }
-
+    
     if (!reviews.length) {
         html += `<div style="text-align:center;color:rgba(255,255,255,0.3);padding:40px 0;font-size:13px;">Пока нет отзывов. Будьте первым!</div>`;
     }
-
+    
     return html;
 }
 
@@ -487,7 +756,7 @@ function renderChat() {
             <p style="font-size:11px; color:rgba(255,255,255,0.3); margin:0 0 10px 0;">Нажмите на аватар для личного сообщения</p>
             <div class="chat-messages-area" id="chatMessagesArea">
     `;
-
+    
     for (let m of chatMessages) {
         let replyHtml = '';
         if (m.replyTo) {
@@ -501,7 +770,7 @@ function renderChat() {
             for (let [r, c] of Object.entries(counts)) reactionsHtml += `<span class="chat-reaction" data-msg="${m.id}" data-reaction="${r}">${r} ${c}</span>`;
             reactionsHtml += '</div>';
         }
-
+        
         html += `
             <div class="chat-message" data-msg-id="${m.id}">
                 <img class="chat-avatar-img" src="${m.avatarUrl}" data-name="${m.name}" data-avatar="${m.avatar}" data-userid="${m.userId}" alt="">
@@ -520,7 +789,7 @@ function renderChat() {
             </div>
         `;
     }
-
+    
     html += `
             </div>
             <div class="chat-input-wrapper">
@@ -538,7 +807,7 @@ function renderChat() {
     return html;
 }
 
-// ========== РЕНДЕР ПРОФИЛЯ (БЕЗ СМЕНЫ ТЕМЫ) ==========
+// ========== РЕНДЕР ПРОФИЛЯ ==========
 function renderProfile() {
     const totalLikes = posts.reduce((s, p) => s + p.likes, 0);
     const totalComments = posts.reduce((s, p) => s + p.comments.length, 0);
@@ -552,7 +821,7 @@ function renderProfile() {
             <div class="stat-card"><div class="stat-number">${posts.length}</div><div class="stat-label">постов</div></div>
             <div class="stat-card"><div class="stat-number">${totalLikes}</div><div class="stat-label">лайков</div></div>
             <div class="stat-card"><div class="stat-number">${totalComments}</div><div class="stat-label">комментов</div></div>
-            <div class="stat-card"><div class="stat-number">${Object.keys(privateChats).length}</div><div class="stat-label">диалогов</div></div>
+            <div class="stat-card"><div class="stat-number">${favorites.length}</div><div class="stat-label">избранное</div></div>
         </div>
         ${isAdmin() ? `
             <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:12px;margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;">
@@ -561,31 +830,33 @@ function renderProfile() {
                 <button class="admin-panel-btn glass-button" onclick="switchRole('user')"><i class="fas fa-user"></i> Пользователь</button>
                 <button class="admin-panel-btn glass-button danger" onclick="clearAllData()"><i class="fas fa-database"></i> Очистить данные</button>
             </div>
-        ` : `
-            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:12px;margin-bottom:16px;text-align:center;font-size:12px;color:rgba(255,255,255,0.3);">
-                <i class="fas fa-lock"></i> Для админ-панели войдите как администратор
+        ` : ''}
+        ${favorites.length ? `
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:12px;margin-bottom:12px;">
+                <div style="font-weight:600;color:white;margin-bottom:8px;"><i class="fas fa-heart" style="color:#ff3b30;"></i> Избранное (${favorites.length})</div>
+                ${favorites.map(id => {
+                    const allItems = getAllItems();
+                    const item = allItems.find(i => i.id === id);
+                    return item ? `<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                        <img src="${item.images ? item.images[0] : item.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+                        <div><div style="font-size:13px;color:white;">${item.name}</div><div style="font-size:11px;color:#0063c7;">${item.price}</div></div>
+                        <span style="margin-left:auto;font-size:11px;color:#ff3b30;cursor:pointer;" onclick="removeFavorite(${id})"><i class="fas fa-times"></i></span>
+                    </div>` : '';
+                }).join('')}
             </div>
-        `}
+        ` : ''}
         <div class="settings-card">
             <div class="setting-row">
                 <div class="setting-left"><i class="fas fa-bell"></i><span>Push-уведомления</span></div>
-                <div class="toggle-switch active" id="pushToggle"></div>
+                <div class="toggle-switch ${pushEnabled ? 'active' : ''}" id="pushToggle"></div>
             </div>
             <div class="setting-row">
                 <div class="setting-left"><i class="fas fa-comment-dots"></i><span>Уведомления чата</span></div>
-                <div class="toggle-switch active" id="chatNotificationsToggle"></div>
+                <div class="toggle-switch ${chatNotificationsEnabled ? 'active' : ''}" id="chatNotificationsToggle"></div>
             </div>
         </div>
-        <div class="features-card">
-            <div class="features-header"><i class="fas fa-rocket"></i><span>Почему SibXtrim?</span></div>
-            <div class="feature-item"><div class="feature-icon"><i class="fas fa-trophy"></i></div><div class="feature-text"><div class="feature-title">Официальный дилер</div><div class="feature-desc">BRP, Polaris, Yamaha</div></div></div>
-            <div class="feature-item"><div class="feature-icon"><i class="fas fa-tools"></i></div><div class="feature-text"><div class="feature-title">Сервисный центр</div><div class="feature-desc">Гарантийное обслуживание</div></div></div>
-            <div class="feature-item"><div class="feature-icon"><i class="fas fa-truck"></i></div><div class="feature-text"><div class="feature-title">Доставка по РФ</div><div class="feature-desc">Быстрая доставка</div></div></div>
-        </div>
-        <div class="business-card">
-            <p><i class="fas fa-map-marker-alt" style="color:#0063c7;"></i> Новосибирск, ул. Оловозаводская улица, 4А</p>
-            <p><i class="fas fa-phone" style="color:#0063c7;"></i> +7 (913) 787-12-32</p>
-            <p><i class="fas fa-clock" style="color:#0063c7;"></i> Ежедневно 9:00—20:00</p>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:12px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);">
+            SibXtrim © 2026 — официальный дилер BRP
         </div>
     `;
 }
@@ -615,7 +886,7 @@ function showAddProduct(type) {
     const title = document.getElementById('adminModalTitle');
     const body = document.getElementById('adminModalBody');
     
-    title.textContent = `Добавить ${type === 'accessory' ? 'аксессуар' : 'товар'}`;
+    title.textContent = `Добавить товар`;
     body.innerHTML = `
         <div class="admin-form-group">
             <label>Название</label>
@@ -641,6 +912,13 @@ function showAddProduct(type) {
             </select>
         </div>
         <div class="admin-form-group">
+            <label>Состояние</label>
+            <select id="adminProductCondition">
+                <option value="new">Новый</option>
+                <option value="used">С пробегом</option>
+            </select>
+        </div>
+        <div class="admin-form-group">
             <label>Изображение (URL)</label>
             <input type="text" id="adminProductImage" placeholder="https://picsum.photos/seed/.../400/400">
         </div>
@@ -655,6 +933,7 @@ function addProduct(type) {
     const spec = document.getElementById('adminProductSpec').value.trim();
     const desc = document.getElementById('adminProductDesc').value.trim();
     const status = document.getElementById('adminProductStatus').value;
+    const condition = document.getElementById('adminProductCondition').value;
     const image = document.getElementById('adminProductImage').value.trim() || `https://picsum.photos/seed/${Date.now()}/400/400`;
 
     if (!name || !price) {
@@ -669,13 +948,18 @@ function addProduct(type) {
         spec: spec || 'Нет данных',
         desc: desc || 'Описание отсутствует',
         status,
-        image
+        condition: condition || 'new',
+        images: [image]
     };
 
-    if (type === 'accessory') {
-        accessories.push(newItem);
-    } else if (type === 'snow') {
-        snowmobiles.push(newItem);
+    if (type === 'accessories' || type === 'accessory') {
+        if (!catalogData.accessories.snow) catalogData.accessories.snow = [];
+        catalogData.accessories.snow.push(newItem);
+    } else if (catalogData[type]) {
+        catalogData[type].push(newItem);
+    } else {
+        if (!catalogData.snowmobiles) catalogData.snowmobiles = [];
+        catalogData.snowmobiles.push(newItem);
     }
 
     document.getElementById('adminModal').classList.remove('show');
@@ -799,16 +1083,21 @@ function clearAllData() {
     if (!canDelete()) return;
     posts = [];
     chatMessages = [];
-    snowmobiles = [];
-    accessories = [];
+    catalogData = {
+        snowmobiles: [],
+        atvs: [],
+        watercraft: [],
+        accessories: { snow: [], atv: [], water: [] },
+        utv: []
+    };
     privateChats = {};
     notifications = [];
     reviews = [];
+    favorites = [];
     showToast('Все данные очищены');
     loadTab('news');
 }
 
-// ========== АДМИН: ОТЗЫВЫ ==========
 function showAddReview() {
     const modal = document.getElementById('adminModal');
     const title = document.getElementById('adminModalTitle');
@@ -882,6 +1171,34 @@ function deleteReview(id) {
     reviews = reviews.filter(r => r.id !== id);
     showToast('Отзыв удалён');
     loadTab('reviews');
+}
+
+// ========== ИЗБРАННОЕ ==========
+function toggleFavorite(itemId) {
+    const index = favorites.indexOf(itemId);
+    if (index > -1) {
+        favorites.splice(index, 1);
+        showToast('Удалено из избранного');
+    } else {
+        favorites.push(itemId);
+        showToast('Добавлено в избранное');
+        vibrate();
+    }
+    updateFavoriteBtn();
+}
+
+function removeFavorite(itemId) {
+    favorites = favorites.filter(id => id !== itemId);
+    showToast('Удалено из избранного');
+    loadTab('profile');
+}
+
+function updateFavoriteBtn() {
+    const btn = document.getElementById('favoriteBtn');
+    if (!btn || !currentModalItem) return;
+    const isFav = favorites.includes(currentModalItem.id);
+    btn.innerHTML = isFav ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+    btn.classList.toggle('active', isFav);
 }
 
 // ========== ЛАЙКИ ==========
@@ -1109,7 +1426,9 @@ function addChatReaction(msgId, reaction) {
         if (!msg.reactions) msg.reactions = [];
         msg.reactions.push(reaction);
         const msgDiv = document.querySelector(`.chat-message[data-msg-id="${msgId}"]`);
+        if (!msgDiv) return;
         const bubble = msgDiv.querySelector('.chat-bubble');
+        if (!bubble) return;
         const counts = {};
         for (let r of msg.reactions) counts[r] = (counts[r] || 0) + 1;
         let reactionsHtml = '<div class="chat-reactions">';
@@ -1349,23 +1668,29 @@ function renderContacts() {
 // ========== НАСТРОЙКИ ==========
 function initPush() {
     const toggle = document.getElementById('pushToggle');
-    if (toggle) toggle.onclick = () => {
-        toggle.classList.toggle('active');
-        pushEnabled = toggle.classList.contains('active');
-        if (pushEnabled && Notification.permission === 'default') Notification.requestPermission();
-        showToast(pushEnabled ? 'Уведомления включены' : 'Уведомления выключены');
-        vibrate();
-    };
+    if (toggle) {
+        toggle.classList.toggle('active', pushEnabled);
+        toggle.onclick = () => {
+            toggle.classList.toggle('active');
+            pushEnabled = toggle.classList.contains('active');
+            if (pushEnabled && Notification.permission === 'default') Notification.requestPermission();
+            showToast(pushEnabled ? 'Уведомления включены' : 'Уведомления выключены');
+            vibrate();
+        };
+    }
 }
 
 function initChatNotif() {
     const toggle = document.getElementById('chatNotificationsToggle');
-    if (toggle) toggle.onclick = () => {
-        toggle.classList.toggle('active');
-        chatNotificationsEnabled = toggle.classList.contains('active');
-        showToast(chatNotificationsEnabled ? 'Уведомления чата вкл' : 'Уведомления чата выкл');
-        vibrate();
-    };
+    if (toggle) {
+        toggle.classList.toggle('active', chatNotificationsEnabled);
+        toggle.onclick = () => {
+            toggle.classList.toggle('active');
+            chatNotificationsEnabled = toggle.classList.contains('active');
+            showToast(chatNotificationsEnabled ? 'Уведомления чата вкл' : 'Уведомления чата выкл');
+            vibrate();
+        };
+    }
 }
 
 // ========== ПРИВЯЗКА СОБЫТИЙ ==========
@@ -1477,6 +1802,88 @@ function attachChatReactionEvents() {
     });
 }
 
+function attachCatalogEvents() {
+    // Клик по пункту меню
+    document.querySelectorAll('.catalog-menu-item').forEach(item => {
+        item.onclick = () => {
+            const section = item.dataset.section;
+            goToCatalogSection(section);
+        };
+    });
+    
+    // Кнопка назад
+    const backBtn = document.getElementById('catalogBackBtn');
+    if (backBtn) {
+        backBtn.onclick = () => {
+            goBackToCatalogMenu();
+        };
+    }
+    
+    // Подразделы аксессуаров
+    document.querySelectorAll('[data-sub]').forEach(btn => {
+        btn.onclick = () => {
+            currentCatalogSubsection = btn.dataset.sub === 'all' ? null : btn.dataset.sub;
+            currentFilter = 'all';
+            loadTab('catalog');
+        };
+    });
+    
+    // Фильтр по наличию
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.onclick = () => {
+            currentFilter = btn.dataset.filter;
+            loadTab('catalog');
+        };
+    });
+    
+    // Фильтр по состоянию (бегунок)
+    document.querySelectorAll('[data-cond]').forEach(btn => {
+        btn.onclick = () => {
+            currentCondition = btn.dataset.cond;
+            loadTab('catalog');
+        };
+    });
+    
+    // КАРТОЧКИ ТОВАРОВ - ИСПРАВЛЕННАЯ ВЕРСИЯ
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.onclick = function(e) {
+            e.stopPropagation();
+            const id = parseInt(this.dataset.id);
+            const section = this.dataset.section;
+            
+            console.log('Клик по карточке:', id, 'секция:', section);
+            
+            let item = null;
+            
+            // Поиск в правильной секции
+            if (section === 'accessories') {
+                for (const sub in catalogData.accessories) {
+                    const found = catalogData.accessories[sub].find(i => i.id === id);
+                    if (found) { item = found; break; }
+                }
+            } else if (catalogData[section]) {
+                item = catalogData[section].find(i => i.id === id);
+            }
+            
+            // Если не нашли - поиск по всем
+            if (!item) {
+                const allItems = getAllItems();
+                item = allItems.find(i => i.id === id);
+            }
+            
+            console.log('Найден товар:', item);
+            
+            if (item) {
+                currentModalItem = item;
+                showProductModal(item);
+            } else {
+                showToast('Товар не найден');
+                console.error('Товар не найден:', id, section);
+            }
+        };
+    });
+}
+
 function createElementFromHTML(html) {
     const div = document.createElement('div');
     div.innerHTML = html.trim();
@@ -1484,56 +1891,381 @@ function createElementFromHTML(html) {
 }
 
 // ========== МОДАЛКА ТОВАРА ==========
-function showProductModal(item, type) {
-    document.getElementById('modalTitle').textContent = item.name;
-    document.getElementById('modalImage').src = item.image;
-    document.getElementById('modalDesc').textContent = item.desc;
-    document.getElementById('modalSpec').textContent = '⚙️ ' + item.spec;
-    document.getElementById('modalPrice').textContent = item.price;
-
+function showProductModal(item) {
+    console.log('showProductModal вызван', item);
+    
+    const modal = document.getElementById('productModal');
+    if (!modal) {
+        console.error('Модалка не найдена!');
+        showToast('Ошибка открытия карточки');
+        return;
+    }
+    
+    sliderIndex = 0;
+    currentModalItem = item;
+    
+    const title = document.getElementById('modalTitle');
+    if (title) title.textContent = item.name;
+    
+    const track = document.getElementById('sliderTrack');
+    const images = item.images || [item.image || 'https://picsum.photos/seed/default/600/400'];
+    
+    if (track) {
+        track.innerHTML = images.map(img => `<img src="${img}" alt="${item.name}">`).join('');
+        track.style.transform = 'translateX(0%)';
+    }
+    
+    const counter = document.getElementById('sliderCounter');
+    if (counter) counter.textContent = `1 / ${images.length}`;
+    
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    
+    if (images.length > 1) {
+        if (prevBtn) prevBtn.style.display = 'block';
+        if (nextBtn) nextBtn.style.display = 'block';
+    } else {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+    }
+    
+    if (prevBtn) {
+        prevBtn.onclick = function(e) {
+            e.stopPropagation();
+            if (sliderIndex > 0) {
+                sliderIndex--;
+                updateSlider(images.length);
+            }
+        };
+    }
+    if (nextBtn) {
+        nextBtn.onclick = function(e) {
+            e.stopPropagation();
+            if (sliderIndex < images.length - 1) {
+                sliderIndex++;
+                updateSlider(images.length);
+            }
+        };
+    }
+    
+    const desc = document.getElementById('modalDesc');
+    if (desc) desc.textContent = item.desc || 'Описание отсутствует';
+    
+    const chars = document.getElementById('modalChars');
+    if (chars) {
+        if (item.chars) {
+            let charsHtml = '';
+            for (const [key, val] of Object.entries(item.chars)) {
+                charsHtml += `<p><span class="char-label">${key}</span><span class="char-value">${val}</span></p>`;
+            }
+            chars.innerHTML = charsHtml;
+        } else {
+            chars.innerHTML = '<p style="color:rgba(255,255,255,0.3);">Характеристики не указаны</p>';
+        }
+    }
+    
+    const spec = document.getElementById('modalSpec');
+    if (spec) spec.textContent = '⚙️ ' + (item.spec || 'Нет данных');
+    
+    const price = document.getElementById('modalPrice');
+    if (price) price.textContent = item.price;
+    
     const statusEl = document.getElementById('modalStatus');
-    if (item.status === 'in_stock') {
-        statusEl.textContent = '✅ В наличии';
-        statusEl.className = 'modal-status in-stock';
-    } else {
-        statusEl.textContent = '⏳ Под заказ (2-4 недели)';
-        statusEl.className = 'modal-status on-order';
+    if (statusEl) {
+        if (item.status === 'in_stock') {
+            statusEl.textContent = '✅ В наличии';
+            statusEl.className = 'modal-status in-stock';
+        } else {
+            statusEl.textContent = '⏳ Под заказ (2-4 недели)';
+            statusEl.className = 'modal-status on-order';
+        }
     }
-
+    
+    const condEl = document.getElementById('modalCondition');
+    if (condEl) {
+        if (item.condition === 'new') {
+            condEl.innerHTML = '<span class="cond-new">🆕 Новый</span>';
+        } else if (item.condition === 'used') {
+            condEl.innerHTML = '<span class="cond-used">📋 С пробегом</span>';
+        } else {
+            condEl.textContent = '';
+        }
+    }
+    
+    const favBtn = document.getElementById('favoriteBtn');
+    if (favBtn) {
+        const isFav = favorites.includes(item.id);
+        favBtn.innerHTML = isFav ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+        favBtn.classList.toggle('active', isFav);
+        favBtn.onclick = function(e) {
+            e.stopPropagation();
+            toggleFavorite(item.id);
+            updateFavoriteBtn();
+        };
+    }
+    
     const adminActions = document.getElementById('modalAdminActions');
-    if (isAdmin()) {
-        adminActions.classList.add('show');
-        adminActions.style.display = 'flex';
-        document.getElementById('modalEditBtn').onclick = () => {
-            showToast('Редактирование пока в разработке');
-        };
-        document.getElementById('modalDeleteBtn').onclick = () => {
-            if (!confirm('Удалить товар?')) return;
-            deleteProduct(item.id, type);
-        };
-    } else {
-        adminActions.classList.remove('show');
-        adminActions.style.display = 'none';
+    if (adminActions) {
+        if (isAdmin()) {
+            adminActions.classList.add('show');
+            adminActions.style.display = 'flex';
+            const editBtn = document.getElementById('modalEditBtn');
+            if (editBtn) {
+                editBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    showToast('Редактирование пока в разработке');
+                };
+            }
+            const deleteBtn = document.getElementById('modalDeleteBtn');
+            if (deleteBtn) {
+                deleteBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    if (!confirm('Удалить товар?')) return;
+                    deleteProduct(item.id);
+                };
+            }
+        } else {
+            adminActions.classList.remove('show');
+            adminActions.style.display = 'none';
+        }
     }
-
-    document.getElementById('productModal').classList.add('show');
+    
+    document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.onclick = function(e) {
+            e.stopPropagation();
+            document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+            const tabId = this.dataset.tab;
+            const target = document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+            if (target) target.classList.add('active');
+        };
+    });
+    
+    modal.classList.add('show');
+    console.log('Модалка открыта');
 }
 
-function deleteProduct(id, type) {
-    if (type === 'snow') snowmobiles = snowmobiles.filter(i => i.id !== id);
-    else if (type === 'accessory') accessories = accessories.filter(i => i.id !== id);
+function updateSlider(total) {
+    const track = document.getElementById('sliderTrack');
+    const counter = document.getElementById('sliderCounter');
+    if (track) {
+        track.style.transform = `translateX(-${sliderIndex * 100}%)`;
+    }
+    if (counter) {
+        counter.textContent = `${sliderIndex + 1} / ${total}`;
+    }
+}
+
+function deleteProduct(id) {
+    for (const key in catalogData) {
+        if (key === 'accessories') {
+            for (const sub in catalogData.accessories) {
+                catalogData.accessories[sub] = catalogData.accessories[sub].filter(i => i.id !== id);
+            }
+        } else {
+            catalogData[key] = catalogData[key].filter(i => i.id !== id);
+        }
+    }
+    favorites = favorites.filter(fid => fid !== id);
     document.getElementById('productModal').classList.remove('show');
     showToast('Товар удалён');
     addNotification('Удаление товара', `Товар ID ${id} удалён`);
     loadTab(activeTab);
 }
 
+// ========== ПОИСК ==========
+function toggleSearch() {
+    const bar = document.getElementById('searchBar');
+    const input = document.getElementById('searchInput');
+    bar.classList.toggle('active');
+    if (bar.classList.contains('active')) {
+        setTimeout(() => input.focus(), 300);
+    } else {
+        input.value = '';
+        hideSearchResults();
+    }
+}
+
+function performSearch(query) {
+    if (!query.trim()) {
+        hideSearchResults();
+        return;
+    }
+    
+    const allItems = getAllItems();
+    const results = allItems.filter(item => 
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        (item.desc && item.desc.toLowerCase().includes(query.toLowerCase())) ||
+        (item.spec && item.spec.toLowerCase().includes(query.toLowerCase()))
+    );
+    
+    searchResults = results;
+    showSearchResults(results, query);
+}
+
+function showSearchResults(results, query) {
+    let overlay = document.getElementById('searchResultsOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'searchResultsOverlay';
+        overlay.className = 'search-results-overlay';
+        document.body.appendChild(overlay);
+    }
+    
+    if (!results.length) {
+        overlay.innerHTML = `
+            <div class="search-no-results">
+                <i class="fas fa-search" style="font-size:32px;display:block;margin-bottom:10px;opacity:0.3;"></i>
+                Ничего не найдено по запросу "${query}"
+            </div>
+        `;
+    } else {
+        overlay.innerHTML = results.map(item => `
+            <div class="search-result-item" data-id="${item.id}" data-type="${item._type || 'accessory'}">
+                <img src="${item.images ? item.images[0] : item.image}" alt="${item.name}">
+                <div class="info">
+                    <div class="name">${item.name}</div>
+                    <div class="price">${item.price}</div>
+                    <div class="category">${item._type || 'Аксессуар'}</div>
+                </div>
+            </div>
+        `).join('');
+        
+        overlay.querySelectorAll('.search-result-item').forEach(el => {
+            el.onclick = () => {
+                const id = parseInt(el.dataset.id);
+                const type = el.dataset.type;
+                let item = null;
+                if (type === 'accessory') {
+                    for (const sub in catalogData.accessories) {
+                        const found = catalogData.accessories[sub].find(i => i.id === id);
+                        if (found) { item = found; break; }
+                    }
+                } else if (catalogData[type]) {
+                    item = catalogData[type].find(i => i.id === id);
+                }
+                if (item) {
+                    currentModalItem = item;
+                    hideSearchResults();
+                    toggleSearch();
+                    showProductModal(item);
+                }
+            };
+        });
+    }
+    
+    overlay.classList.add('active');
+}
+
+function hideSearchResults() {
+    const overlay = document.getElementById('searchResultsOverlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+function initSearch() {
+    const searchBtn = document.getElementById('searchBtn');
+    const searchClose = document.getElementById('searchClose');
+    const searchInput = document.getElementById('searchInput');
+    
+    if (searchBtn) {
+        searchBtn.onclick = () => {
+            toggleSearch();
+            if (!document.getElementById('searchBar').classList.contains('active')) {
+                hideSearchResults();
+            }
+        };
+    }
+    
+    if (searchClose) {
+        searchClose.onclick = () => {
+            toggleSearch();
+            hideSearchResults();
+        };
+    }
+    
+    if (searchInput) {
+        searchInput.oninput = (e) => {
+            performSearch(e.target.value);
+        };
+        searchInput.onkeydown = (e) => {
+            if (e.key === 'Escape') {
+                toggleSearch();
+                hideSearchResults();
+            }
+        };
+    }
+}
+
+// ========== МОДАЛКА УВЕДОМЛЕНИЙ ==========
+function showNotifModal() {
+    const modal = document.getElementById('notifModal');
+    modal.classList.add('show');
+    
+    const list = document.getElementById('notifListFull');
+    if (!notifications.length) {
+        list.innerHTML = '<div style="padding:16px;text-align:center;color:rgba(255,255,255,0.3);font-size:13px;">Нет уведомлений</div>';
+    } else {
+        list.innerHTML = notifications.map(n => `
+            <div class="notif-item">
+                <div class="notif-title">${n.title}</div>
+                <div class="notif-text">${n.text}</div>
+                <div class="notif-time">${n.time}</div>
+            </div>
+        `).join('');
+    }
+    
+    const pushToggle = document.getElementById('pushToggleModal');
+    const chatToggle = document.getElementById('chatNotificationsToggleModal');
+    
+    if (pushToggle) {
+        pushToggle.classList.toggle('active', pushEnabled);
+        pushToggle.onclick = () => {
+            pushToggle.classList.toggle('active');
+            pushEnabled = pushToggle.classList.contains('active');
+            if (pushEnabled && Notification.permission === 'default') Notification.requestPermission();
+            showToast(pushEnabled ? 'Уведомления включены' : 'Уведомления выключены');
+            vibrate();
+        };
+    }
+    
+    if (chatToggle) {
+        chatToggle.classList.toggle('active', chatNotificationsEnabled);
+        chatToggle.onclick = () => {
+            chatToggle.classList.toggle('active');
+            chatNotificationsEnabled = chatToggle.classList.contains('active');
+            showToast(chatNotificationsEnabled ? 'Уведомления чата вкл' : 'Уведомления чата выкл');
+            vibrate();
+        };
+    }
+}
+
+// ========== НАВИГАЦИЯ ПО КАТАЛОГУ ==========
+function goToCatalogSection(section) {
+    currentCatalogSection = section;
+    currentCatalogSubsection = null;
+    currentFilter = 'all';
+    currentCondition = 'all';
+    loadTab('catalog');
+}
+
+function goBackToCatalogMenu() {
+    currentCatalogSection = null;
+    currentCatalogSubsection = null;
+    currentFilter = 'all';
+    currentCondition = 'all';
+    loadTab('catalog');
+}
+
+// ========== МОДАЛКИ ==========
 function initModals() {
     const closeModal = document.getElementById('closeModal');
     const productModal = document.getElementById('productModal');
     const orderBtn = document.getElementById('orderBtn');
     const closeAdminModal = document.getElementById('closeAdminModal');
     const adminModal = document.getElementById('adminModal');
+    const closeNotifModal = document.getElementById('closeNotifModal');
+    const notifModal = document.getElementById('notifModal');
 
     if (closeModal) closeModal.onclick = () => productModal.classList.remove('show');
     if (orderBtn) orderBtn.onclick = () => { 
@@ -1543,17 +2275,11 @@ function initModals() {
         vibrate(); 
     };
     if (closeAdminModal) closeAdminModal.onclick = () => adminModal.classList.remove('show');
+    if (closeNotifModal) closeNotifModal.onclick = () => notifModal.classList.remove('show');
+    
     productModal.onclick = (e) => { if (e.target === productModal) productModal.classList.remove('show'); };
     adminModal.onclick = (e) => { if (e.target === adminModal) adminModal.classList.remove('show'); };
-
-    document.addEventListener('click', (e) => {
-        const panel = document.getElementById('notifPanel');
-        const bell = document.getElementById('notifBell');
-        if (panel && panel.classList.contains('show') && !panel.contains(e.target) && !bell.contains(e.target)) {
-            panel.classList.remove('show');
-            setTimeout(() => panel.style.display = 'none', 300);
-        }
-    });
+    notifModal.onclick = (e) => { if (e.target === notifModal) notifModal.classList.remove('show'); };
 }
 
 // ========== ЗАГРУЗКА ТАБА ==========
@@ -1568,9 +2294,13 @@ function loadTab(tab) {
 
     document.getElementById('adminPanelBtn').style.display = isAdmin() ? 'block' : 'none';
 
-    if (tab === 'snowmobile') {
-        content.innerHTML = renderSection(snowmobiles, 'Снегоходы', 'fas fa-box', 'snow');
-        attachProductEvents('snow');
+    if (tab === 'catalog') {
+        if (currentCatalogSection) {
+            content.innerHTML = renderCatalogSection(currentCatalogSection);
+        } else {
+            content.innerHTML = renderCatalogMenu();
+        }
+        attachCatalogEvents();
     } else if (tab === 'news') {
         content.innerHTML = renderFeed();
         attachFeedEvents();
@@ -1594,39 +2324,13 @@ function loadTab(tab) {
     });
 }
 
-function attachProductEvents(type) {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.onclick = () => {
-            currentFilter = btn.dataset.filter;
-            loadTab(activeTab);
-        };
-    });
-
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.onclick = () => {
-            const id = parseInt(card.dataset.id);
-            const itemType = card.dataset.type;
-            let item = null;
-            if (itemType === 'snow') item = snowmobiles.find(i => i.id === id);
-            else if (itemType === 'accessory') item = accessories.find(i => i.id === id);
-            if (item) showProductModal(item, itemType);
-        };
-    });
-
-    document.querySelectorAll('.accessory-mini').forEach(card => {
-        card.onclick = () => {
-            const id = parseInt(card.dataset.id);
-            const item = accessories.find(i => i.id === id);
-            if (item) showProductModal(item, 'accessory');
-        };
-    });
-}
-
 // ========== ИНИЦИАЛИЗАЦИЯ ==========
 function init() {
     initModals();
+    initSearch();
     loadTab('news');
     setTimeout(() => { if (Notification.permission === 'default') Notification.requestPermission(); }, 1000);
+    
     document.querySelectorAll('.tab-item').forEach(tab => {
         tab.onclick = () => { vibrate(); loadTab(tab.dataset.tab); };
     });
@@ -1638,7 +2342,9 @@ function init() {
 
     document.getElementById('notifBell').onclick = (e) => {
         e.stopPropagation();
-        showNotifications();
+        showNotifModal();
+        notifications.forEach(n => n.read = true);
+        updateNotifBadge();
     };
 
     updateNotifBadge();

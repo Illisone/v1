@@ -30,14 +30,22 @@
                     <span>SibXtrim</span>
                 </div>
                 <div class="header-actions" id="headerActions">
-                    <i class="fas fa-search" onclick="showToast('Поиск скоро')"></i>
-                    <i class="fas fa-bell" id="notifBell" style="position:relative;" onclick="showNotifications()">
+                    <i class="fas fa-search" id="searchBtn"></i>
+                    <i class="fas fa-bell" id="notifBell" style="position:relative;">
                         <span id="notifDot" style="display:none;"></span>
                     </i>
-                    <i class="fas fa-user-shield" id="adminPanelBtn" style="display:none;" onclick="openAdminPanel()"></i>
+                    <i class="fas fa-user-shield" id="adminPanelBtn" style="display:none;"></i>
                 </div>
             </div>
-            <p class="tagline">Снегоходы BRP | Аксессуары | Сервис</p>
+        </div>
+
+        <!-- ПОИСКОВАЯ СТРОКА -->
+        <div class="search-bar" id="searchBar">
+            <div class="search-inner">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Поиск по каталогу..." autofocus>
+                <i class="fas fa-times" id="searchClose"></i>
+            </div>
         </div>
 
         <!-- КОНТЕНТ -->
@@ -47,11 +55,11 @@
         <div class="tabbar" id="tabbar">
             <div class="tab-item active" data-tab="news">
                 <i class="fas fa-newspaper"></i>
-                <span>Новости</span>
+                <span>Поступления</span>
             </div>
-            <div class="tab-item" data-tab="snowmobile">
-                <i class="fas fa-box"></i>
-                <span>Снегоходы</span>
+            <div class="tab-item" data-tab="catalog">
+                <i class="fas fa-th-large"></i>
+                <span>Каталог</span>
             </div>
             <div class="tab-item" data-tab="chat">
                 <i class="fas fa-comments"></i>
@@ -69,7 +77,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛКИ -->
+    <!-- МОДАЛКА ТОВАРА -->
     <div class="modal" id="productModal">
         <div class="modal-content product-modal">
             <div class="modal-header">
@@ -77,14 +85,34 @@
                 <i class="fas fa-times" id="closeModal"></i>
             </div>
             <div class="modal-body-scroll">
-                <div id="modalImageWrap" class="modal-image-wrap">
-                    <img id="modalImage" src="" alt="" class="modal-image">
+                <div class="modal-image-slider">
+                    <div class="slider-container" id="sliderContainer">
+                        <div class="slider-track" id="sliderTrack"></div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="slider-btn prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+                        <span class="slider-counter" id="sliderCounter">1 / 1</span>
+                        <button class="slider-btn next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <button class="favorite-btn" id="favoriteBtn"><i class="far fa-heart"></i></button>
                 </div>
-                <div class="modal-desc" id="modalDesc"></div>
                 <div class="modal-spec" id="modalSpec"></div>
                 <div class="modal-price" id="modalPrice"></div>
                 <div class="modal-status" id="modalStatus"></div>
-                <div id="modalAdminActions" style="display:none;margin-top:10px;display:flex;gap:8px;">
+                <div class="modal-condition" id="modalCondition"></div>
+                
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="desc">Описание</button>
+                    <button class="modal-tab" data-tab="chars">Характеристики</button>
+                </div>
+                <div class="modal-tab-content active" id="tabDesc">
+                    <div class="modal-desc" id="modalDesc"></div>
+                </div>
+                <div class="modal-tab-content" id="tabChars">
+                    <div class="modal-chars" id="modalChars"></div>
+                </div>
+                
+                <div id="modalAdminActions" style="display:none;">
                     <button class="admin-btn glass-button" id="modalEditBtn"><i class="fas fa-edit"></i> Редактировать</button>
                     <button class="admin-btn glass-button danger" id="modalDeleteBtn"><i class="fas fa-trash"></i> Удалить</button>
                 </div>
@@ -95,6 +123,7 @@
         </div>
     </div>
 
+    <!-- МОДАЛКА АДМИНА -->
     <div class="modal" id="adminModal">
         <div class="modal-content" style="max-width:400px;">
             <div class="modal-header">
@@ -107,6 +136,32 @@
         </div>
     </div>
 
+    <!-- МОДАЛКА УВЕДОМЛЕНИЙ -->
+    <div class="modal" id="notifModal">
+        <div class="modal-content" style="max-width:400px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-bell" style="color:#0063c7;"></i> Уведомления</h3>
+                <i class="fas fa-times" id="closeNotifModal"></i>
+            </div>
+            <div class="modal-body-scroll">
+                <div class="notif-modal-settings">
+                    <div class="setting-row">
+                        <div class="setting-left"><i class="fas fa-bell"></i><span>Push-уведомления</span></div>
+                        <div class="toggle-switch active" id="pushToggleModal"></div>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-left"><i class="fas fa-comment-dots"></i><span>Уведомления чата</span></div>
+                        <div class="toggle-switch active" id="chatNotificationsToggleModal"></div>
+                    </div>
+                </div>
+                <div class="notif-list-full" id="notifListFull">
+                    <div style="padding:16px;text-align:center;color:rgba(255,255,255,0.3);font-size:13px;">Нет уведомлений</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПИКЕР РЕАКЦИЙ -->
     <div class="reaction-picker" id="reactionPicker" style="display: none;">
         <span class="reaction-option" data-reaction="👍">👍</span>
         <span class="reaction-option" data-reaction="❤️">❤️</span>
@@ -115,14 +170,7 @@
         <span class="reaction-option" data-reaction="😢">😢</span>
     </div>
 
-    <div class="notif-panel" id="notifPanel" style="display:none;">
-        <div class="notif-header">
-            <span>Уведомления</span>
-            <i class="fas fa-times" onclick="document.getElementById('notifPanel').style.display='none'"></i>
-        </div>
-        <div class="notif-list" id="notifList"></div>
-    </div>
-
+    <!-- ТОСТ -->
     <div class="toast" id="toast"></div>
 
     <script src="app.js"></script>
